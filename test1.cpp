@@ -21,4 +21,4 @@ int main(){
     cout << "Fakultät von" << i << "ist" << fak(i) << endl;
 
     return 0;
-}s
+}
