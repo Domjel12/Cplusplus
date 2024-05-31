@@ -14,3 +14,51 @@ const int* const cpc = &k;
 ++cpc;
 
 unvollständig !!!!!!!!!!
+Natürlich, hier ist die Interpretation der gegebenen C++-Anweisungen auf Deutsch:
+
+1. `int n = 44;`
+   - Eine Variable `n` vom Typ `int` wird deklariert und mit `44` initialisiert.
+
+2. `int* p = &n;`
+   - Ein Zeiger `p` auf einen `int` wird deklariert und mit der Adresse von `n` initialisiert.
+
+3. `++(*p);`
+   - Der Wert, auf den `p` zeigt, wird um `1` erhöht. Da `p` auf `n` zeigt, wird `n` von `44` auf `45` erhöht.
+
+4. `++p;`
+   - Der Zeiger `p` selbst wird auf die nächste `int`-Adresse im Speicher erhöht. Dies beeinflusst den Wert von `n` nicht.
+
+5. `int* const cp = &n;`
+   - Ein konstanter Zeiger `cp` auf einen `int` wird deklariert und mit der Adresse von `n` initialisiert. Der Zeiger kann die Adresse, die er hält, nicht ändern, aber der Wert, auf den er zeigt, kann sich ändern.
+
+6. `++(*cp);`
+   - Der Wert, auf den `cp` zeigt, wird um `1` erhöht. Da `cp` auf `n` zeigt, wird `n` von `45` auf `46` erhöht.
+
+7. `++cp;`
+   - Diese Anweisung ist ungültig, weil `cp` ein konstanter Zeiger ist und nicht erhöht werden kann.
+
+8. `const int k = 88;`
+   - Eine konstante `int`-Variable `k` wird deklariert und mit `88` initialisiert. Der Wert von `k` kann sich nicht ändern.
+
+9. `const int* pc = &k;`
+   - Ein Zeiger `pc` auf einen konstanten `int` wird deklariert und mit der Adresse von `k` initialisiert. Der Wert, auf den `pc` zeigt, kann sich nicht ändern, aber der Zeiger selbst kann auf verschiedene Adressen zeigen.
+
+10. `++(*pc);`
+    - Diese Anweisung ist ungültig, weil `pc` ein Zeiger auf einen konstanten `int` ist und der Wert, auf den `pc` zeigt, nicht geändert werden kann.
+
+11. `++pc;`
+    - Der Zeiger `pc` selbst wird auf die nächste `int`-Adresse im Speicher erhöht. Dies beeinflusst den Wert von `k` nicht.
+
+12. `const int* const cpc = &k;`
+    - Ein konstanter Zeiger `cpc` auf einen konstanten `int` wird deklariert und mit der Adresse von `k` initialisiert. Weder der Zeiger noch der Wert, auf den er zeigt, können sich ändern.
+
+13. `++(*cpc);`
+    - Diese Anweisung ist ungültig, weil `cpc` ein konstanter Zeiger auf einen konstanten `int` ist und der Wert, auf den `cpc` zeigt, nicht geändert werden kann.
+
+14. `++cpc;`
+    - Diese Anweisung ist ungültig, weil `cpc` ein konstanter Zeiger ist und nicht erhöht werden kann.
+
+Zusammenfassung:
+- `++(*p);` und `++(*cp);` sind gültig und erhöhen den Wert von `n`.
+- `++p;` und `++pc;` sind gültig und erhöhen die Zeiger selbst.
+- `++cp;`, `++(*pc);`, `++(*cpc);` und `++cpc;` sind ungültige Operationen.
