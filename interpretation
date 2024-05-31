@@ -1,13 +1,13 @@
-int n = 44; n=44                            
-int* p = &n;  zeigt auf n also 44
-++(*p); 44 wird um 1 addiert
-++p; 44 wird um 1 addiert?
-int* const cp = &n; zeigt auf n
-++(*cp); 44 um 1 addiert
+int n = 44;                        
+int* p = &n; 
+++(*p); 
+++p; 
+int* const cp = &n; 
+++(*cp); 
 ++cp;
-const int k = 88; k=88
-const int* pc = &k; pc=k=88
-++(*pc); 88 um 1 addiert
+const int k = 88; 
+const int* pc = &k; 
+++(*pc); 
 ++pc;
 const int* const cpc = &k;
 ++(*cpc);
