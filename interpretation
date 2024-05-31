@@ -13,8 +13,8 @@ const int* const cpc = &k;
 ++(*cpc);
 ++cpc;
 
-unvollständig !!!!!!!!!!
-Natürlich, hier ist die Interpretation der gegebenen C++-Anweisungen auf Deutsch:
+
+hier ist die Interpretation:
 
 1. `int n = 44;`
    - Eine Variable `n` vom Typ `int` wird deklariert und mit `44` initialisiert.
