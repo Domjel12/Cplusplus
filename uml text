@@ -1,4 +1,5 @@
-esc shift :
-vi startuml.uml
+esc shift :  //schließen
+vi startuml.uml //Öffnen
 
-java -jar /usr/share/plantuml/plantuml.jar startuml.uml
+java -jar /usr/share/plantuml/plantuml.jar startuml.uml  //generate
+plant
