@@ -1,0 +1,17 @@
+@startuml
+class complx {
+__private Member Data __
+-re : double
+-im : double
+__ public Member Functions __
++complx()
++\~complx
++Complx(const Complx&)
+-- Getter --
++double real()
++double imag()
+-- Setter --
++void real()
++void imag()
+}
+@enduml
