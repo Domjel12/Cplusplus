@@ -3,78 +3,121 @@
 class Konto {
   public:
      Konto() {};  // Default Konstruktor
-     bool abfragen(unsigned int, int&);
-     bool einzahlen(unsigned int, int, int&);
-     bool auszahlen(unsigned int, int, int&);
-     bool eroeffnen(unsigned int);
-     bool schliessen(unsigned int, int&);
-private:
-     unsigned int kontonummer;
-     int betrag, saldo;
+     virtual void bankinfo(void){ std::cout << "Banknummer: 13122" << std::endl;};
+     virtual int abfragen(unsigned int); //Kontonummer; return ist Saldo
+     virtual int einzahlen(unsigned int, int); //Kontonummer, Betrag; Return ist Saldo
+     virtual int auszahlen(unsigned int, int);
+  protected:
+    unsigned int kontonummer;
+    int saldo;
+};
+
+class Giro : public Konto{
+  public:
+    Giro(unsigned int n, int s):kontonummer(n), saldo(s)
+    {std::cout << "Girokonto eröffnet: " << n << std::endl; };
+    int abfragen(unsigned int k)
+      {
+    if (kontonummer != k) return -999;
+    return saldo;
+      }
+    int einzahlen(unsigned int k, int b)
+      {
+    if (kontonummer != k) return -999;
+    return saldo += b; 
+      }
+    int auszahlen(unsigned int k, int b)
+      {
+    if (kontonummer != k) return -999;
+    if (b > saldo) return -999;
+    return saldo -= b;
+      }
+  private:
+    unsigned int kontonummer;
+    int saldo;
+};
+
+class Tages : public Konto{
+  public:
+    Tages(unsigned int n, int s) :kontonummer(n), saldo(s)
+    {std::cout << "Tagesgeldkonto eröffnet: " << n << std::endl; };
+    int abfragen(unsigned int k)
+      {
+    if (kontonummer != k) return -999;
+    return saldo;
+      }
+    int einzahlen(unsigned int k, int b)
+      {
+    if (kontonummer != k) return -999;
+    return saldo += b; 
+      }
+    int auszahlen(unsigned int k, int b)
+      {
+    if (kontonummer != k) return -999;
+    if (b > saldo) return -999;
+    return saldo -= b;
+      }
+  private:
+    unsigned int kontonummer;
+    int saldo;
+    float zinssatz;
+    int tage;
+};
+
+class Paypal : public Konto{
+  public:
+    Paypal(unsigned int n, int s) : kontonummer(n), saldo(s)
+    {std::cout << "Paypalkonto eröffnet: " << n << std::endl; };
+    int abfragen(unsigned int n){
+      if (kontonummer != n) return -999;
+      return saldo;
+    }
+    int einzahlen(unsigned int k, int b)
+      {
+    if (kontonummer != k) return -999;
+    return saldo += b; 
+      }
+    int auszahlen(unsigned int k, int b)
+      {
+    if (kontonummer != k) return -999;
+    if (b > saldo) return -998;
+    return saldo -= b;
+      }
+  private:
+    unsigned int kontonummer;
+    int saldo;
+
 };
 
 using namespace std;
 
 int main()
 {
-  int a = 0;
-  int& guthaben = a;
-  int b = 0;
-  int& saldo = b;
-  
-  unsigned int k = 4711;
+  Giro Daniel{4711, 100};
+  cout << "Konto Daniel " << Daniel.abfragen(4711) << endl;
+  Daniel.bankinfo();
+  Paypal Daniel_Paypal{ 1000, 10};
+  cout << "Paypalkonto Daniel " << Daniel_Paypal.abfragen(1000) << endl;
 
-  Konto erwin;
-  erwin.eroeffnen(k);
-  erwin.abfragen(k,saldo);
-   
-  cout << "Erwin Kontostand: " << saldo << " Euro" << endl;
-  
-  int i = 100;
-  erwin.einzahlen(k,i,saldo);
-  cout << "Erwin Kontostand: " << saldo << " Euro "<< endl;
-  
-  i = 50;
-  erwin.auszahlen(k,i,saldo);
-  cout << "Erwin Kontostand: " << saldo << " Euro "<< endl;
-  
- // cout << "Erwin Kontostand: " << Konto::kontonummer << endl;
-  
+
   return 0;
 }
-bool Konto::eroeffnen(unsigned int konum)
+
+int Konto::abfragen(unsigned int konum)
 {
-  kontonummer = konum;
-  saldo = 0;
-  return true;
-}
-bool Konto::schliessen(unsigned int konum, int& kontostd)
-{
-  if (kontonummer != konum) return false;
-  kontostd = saldo;
-  return true;
+  if (kontonummer != konum) return -999;
+  return saldo;
 }
 
-bool Konto::abfragen(unsigned int konum, int& kontostd)
+int Konto::einzahlen(unsigned int konum, int betrag)
 {
-  if (kontonummer != konum) return false;
-  kontostd = saldo;
-  return true;
+    if (kontonummer != konum) return -999;
+    return saldo += betrag; 
 }
 
-bool Konto::einzahlen(unsigned int konum, int betrag, int& kontostd)
+int Konto::auszahlen(unsigned int konum, int betrag)
 {
-    if (kontonummer != konum) return false;
-    saldo += betrag; 
-    kontostd = saldo;
-    return true;
-}
-
-bool Konto::auszahlen(unsigned int konum, int betrag, int& kontostd)
-{
-    if (kontonummer != konum) return false;
-    if (betrag > saldo) return false;
-    saldo -= betrag; 
-    kontostd = saldo;
-    return true;
+    if (kontonummer != konum) return -999;
+    if (betrag > saldo) return -999;
+    return saldo -= betrag;
 }
