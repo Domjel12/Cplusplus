@@ -1,3 +1,5 @@
+//vererbung 
+
 #include <iostream>
 
 class Konto {
