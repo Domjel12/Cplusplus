@@ -97,6 +97,8 @@ int main()
 {
   Giro Daniel{4711, 100};
   cout << "Konto Daniel " << Daniel.abfragen(4711) << endl;
+  Daniel.einzahlen(4711, 101);
+  cout << "Konto Daniel " << Daniel.abfragen(4711) << endl;
   Daniel.bankinfo();
   Paypal Daniel_Paypal{ 1000, 10};
   cout << "Paypalkonto Daniel " << Daniel_Paypal.abfragen(1000) << endl;
