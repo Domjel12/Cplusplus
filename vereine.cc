@@ -9,11 +9,33 @@
 #include <iostream>
 #include <string>
 #include <vector>
+using namespace std;
+#include <fstream>
+#include <sstream>
 
 typedef std::vector<std::string> Vereine;
 
 int load(Vereine& v)
 {
+  string fn = "bundesliga_tabelle.csv";
+
+  ifstream input(fn,std::ios::app);
+  if (!input.is_open()){
+    cout << "Konnte Datei " << fn << " nicht öffnen" << endl;
+    return -1;
+  }
+
+  for (string line, field; getline(input, line) ; )
+    if (!(line.empty() || line.at(0) == '#' || line.at(0) == ' ')) {
+      stringstream s(line);
+      int i = 0;
+      while (getline(s,field,s.widen('|'))){
+        i++;
+        if (i == 2) v.push_back(field);
+      }
+    }
+  
+/*
   v.push_back("Bayer Leverkusen");  
   v.push_back("1. FC Koeln");
   v.push_back("Borussia Moenchengladbach");
@@ -23,7 +45,7 @@ int load(Vereine& v)
   v.push_back("Bayern Muechnen");
   v.push_back("Union Berlin");
   v.push_back("FC St. Pauli");
-
+*/
   return v.size();
 }
 
@@ -34,7 +56,7 @@ void print(Vereine v)
   std::cout << std::endl;
 }
 
-int main(int argc, char **argv)
+int main()
 {
   int anz;
   Vereine v; // leer
